@@ -17,5 +17,5 @@ public class Role extends Auditable{
 
     private String name;
 
-    private String roles;
+    private Authority authorities;
 }
