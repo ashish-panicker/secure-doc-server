@@ -1,5 +1,6 @@
 package com.easyskillup.sdoc.entities;
 
+import com.easyskillup.sdoc.domain.RequestContext;
 import com.easyskillup.sdoc.exceptions.ApiException;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -43,7 +44,7 @@ public abstract class Auditable {
 
     @PrePersist
     public void auditablePrePersist(){
-        Long userId = 1l;
+        Long userId = RequestContext.getUserId();
         if(userId == null){
             throw new ApiException("Cannot persist the entity with a null user id in the RequestContext.");
         }
@@ -55,7 +56,7 @@ public abstract class Auditable {
 
     @PreUpdate
     public void auditablePreUpdate(){
-        Long userId = 1l;
+        Long userId = RequestContext.getUserId();
         if(userId == null){
             throw new ApiException("Cannot update the entity with a null user id in the RequestContext.");
         }
