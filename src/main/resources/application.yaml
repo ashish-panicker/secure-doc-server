@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: secure-doc-server
+  mail:
+    host: ""
+    username: ""
+    password: ""
+    port: 000
