@@ -1,0 +1,36 @@
+version: '4'
+services:
+  postgres:
+    container_name: postgre_db
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    expose:
+      - 5432
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgresvol:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.dl/schema.sql
+  pgadmin:
+    container_name: postgre_admin
+    image: dpage/pgadmin4:latest
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_DEFAULT_ADDRESS: ${PGADMIN_DEFAULT_ADDRESS}
+      PGADMIN_LISTEN_PORT: ${PGADMIN_LISTEN_PORT}
+    expose:
+      - 600
+    ports:
+      - "7000:6000"
+    volumes:
+      - pgadminvol:/var/lib/pgadmin
+
+volumes:
+  postgresvol:
+  pgadminvol:
