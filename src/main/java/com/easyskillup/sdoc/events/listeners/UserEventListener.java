@@ -1,4 +1,4 @@
-package com.easyskillup.sdoc.events.listners;
+package com.easyskillup.sdoc.events.listeners;
 
 import com.easyskillup.sdoc.events.UserEvent;
 import com.easyskillup.sdoc.service.NotificationService;
@@ -18,9 +18,9 @@ public class UserEventListener {
         var type = event.getEvent();
         switch (type) {
             case REGISTER_ACCOUNT ->
-                    emailService.sendNewAccountNotification(user.getFirstName(), user.getEmail(), (String) event.getData().get(""));
+                    emailService.sendNewAccountNotification(user.getFirstName(), user.getEmail(), (String) event.getData().get("key"));
             case RESET_PASSWORD ->
-                    emailService.sendPasswordResetNotification(user.getFirstName(), user.getEmail(), (String) event.getData().get(""));
+                    emailService.sendPasswordResetNotification(user.getFirstName(), user.getEmail(), (String) event.getData().get("key"));
         }
     }
 }
