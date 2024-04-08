@@ -13,6 +13,7 @@ import lombok.*;
 @Entity
 @Table(name = "roles")
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
+@ToString
 public class Role extends Auditable{
 
     private String name;

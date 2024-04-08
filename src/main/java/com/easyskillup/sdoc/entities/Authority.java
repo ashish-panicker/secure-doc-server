@@ -1,7 +1,10 @@
 package com.easyskillup.sdoc.entities;
 
+import lombok.Getter;
+
 import static com.easyskillup.sdoc.entities.AuthConstant.*;
 
+@Getter
 public enum Authority {
 
     USER(USER_AUTHORITIES),
@@ -15,7 +18,4 @@ public enum Authority {
         this.value = value;
     }
 
-    public String getValue() {
-        return value;
-    }
 }

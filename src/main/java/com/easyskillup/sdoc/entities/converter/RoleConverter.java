@@ -10,13 +10,19 @@ import java.util.stream.Stream;
 public class RoleConverter implements AttributeConverter<Authority, String> {
     @Override
     public String convertToDatabaseColumn(Authority authority) {
-        if (authority == null) return null;
+        if (authority == null) {
+            return null;
+        }
         return authority.getValue();
     }
 
     @Override
     public Authority convertToEntityAttribute(String s) {
-        if (s == null) return null;
+        System.err.println(s);
+        if (s == null) {
+            return null;
+        }
+        System.err.println("convertToEntityAttribute");
         return Stream
                 .of(Authority.values())
                 .filter(authority -> authority.getValue().equals(s))
