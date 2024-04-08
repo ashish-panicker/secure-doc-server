@@ -22,10 +22,10 @@ public class NotificationServiceImpl implements NotificationService {
     private final JavaMailSender mailSender;
     private final Logger logger = LoggerFactory.getLogger(NotificationServiceImpl.class);
 
-    @Value("${spring.email.verified.host}")
+    @Value("${spring.mail.verified.host}")
     private String host;
 
-    @Value("${spring.email.verified.username}")
+    @Value("${EMAIL_ID}")
     private String fromEmail;
 
     @Override
