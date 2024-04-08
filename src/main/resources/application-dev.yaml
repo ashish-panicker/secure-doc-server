@@ -1,0 +1,14 @@
+DB_HOST: localhost
+DB_PORT: 5432
+DB_NAME: doc_db
+DB_USER: user
+DB_PASSWORD: welcome
+
+CONTAINER_PORT: 8000
+ACTIVE_PROFILE: dev
+
+EMAIL_HOST: smtp.gmail.com
+EMAIL_PORT: 587
+EMAIL_ID:
+EMAIL_PASWORD:
+EMAIL_VERIFIED_HOST: http://localhost:8000
