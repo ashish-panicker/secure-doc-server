@@ -14,7 +14,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -29,13 +29,13 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
     private final ConfirmationRepository confirmationRepository;
     private final CredentialRepository credentialRepository;
-//    private final BCryptPasswordEncoder encoder;
+    private final BCryptPasswordEncoder encoder;
     private final ApplicationEventPublisher publisher;
 
     @Override
     public void createUser(String firstName, String lastName, String email, String password) {
         var user = userRepository.save(createNewuser(firstName, lastName, email));
-        credentialRepository.save(new Credential(user, password));
+        credentialRepository.save(new Credential(user, encoder.encode(password)));
         var confirmation = confirmationRepository.save(new Confirmation(user));
         publisher.publishEvent(new UserEvent(user, EventType.REGISTER_ACCOUNT, Map.of("key", confirmation.getKey())));
     }
@@ -43,6 +43,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public Role getRoleName(String name) {
         return roleRepository.findByNameIgnoreCase(name).orElseThrow(() -> new ApiException(String.format("%s role not found", name)));
+    }
+
+    @Override
+    public void verifyAccountKey(String token) {
+        var confirmation = confirmationRepository
+                .findByKey(token)
+                .orElseThrow(() -> new ApiException("Cannot find user corresponding to token " + token));
+        var user = userRepository
+                .findByEmailIgnoreCase(confirmation.getUser().getEmail())
+                .orElseThrow(() -> new ApiException("Cannot find user corresponding to token " + token));
+        user.setAccountEnabled(true);
+        user.setAccountLocked(false);
+        userRepository.save(user);
+        confirmationRepository.delete(confirmation);
+        ;
     }
 
     private User createNewuser(String firstName, String lastName, String email) {

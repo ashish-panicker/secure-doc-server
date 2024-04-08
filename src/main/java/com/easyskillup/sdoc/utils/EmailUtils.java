@@ -11,7 +11,7 @@ public class EmailUtils {
                                 
                                 
                 Support Team
-                """, name, getVerificationUrl(host, token, "account"));
+                """, name, getVerificationUrl(host.concat("/users"), token, "account"));
     }
 
     private static String getVerificationUrl(String host, String token, String action) {

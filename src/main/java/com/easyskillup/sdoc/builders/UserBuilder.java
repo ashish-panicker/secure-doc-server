@@ -2,7 +2,6 @@ package com.easyskillup.sdoc.builders;
 
 import com.easyskillup.sdoc.entities.Role;
 import com.easyskillup.sdoc.entities.User;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.UUID;
 
@@ -20,7 +19,7 @@ public class UserBuilder {
                 .lastLogin(now())
                 .accountEnabled(false)
                 .accountExpired(false)
-                .accountLocked(false)
+                .accountLocked(true)
                 .loginAttempt(0)
                 .qrCodeSecret(EMPTY)
                 .bio(EMPTY)
