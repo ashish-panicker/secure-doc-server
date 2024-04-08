@@ -14,7 +14,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -29,13 +29,13 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
     private final ConfirmationRepository confirmationRepository;
     private final CredentialRepository credentialRepository;
-    private final BCryptPasswordEncoder encoder;
+//    private final BCryptPasswordEncoder encoder;
     private final ApplicationEventPublisher publisher;
 
     @Override
     public void createUser(String firstName, String lastName, String email, String password) {
         var user = userRepository.save(createNewuser(firstName, lastName, email));
-        credentialRepository.save(new Credential(user, encoder.encode(password)));
+        credentialRepository.save(new Credential(user, password));
         var confirmation = confirmationRepository.save(new Confirmation(user));
         publisher.publishEvent(new UserEvent(user, EventType.REGISTER_ACCOUNT, Map.of("key", confirmation.getKey())));
     }
