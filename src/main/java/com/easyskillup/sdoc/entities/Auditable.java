@@ -44,7 +44,7 @@ public abstract class Auditable {
 
     @PrePersist
     public void auditablePrePersist(){
-        Long userId = RequestContext.getUserId();
+        Long userId = 0L;
         if(userId == null){
             throw new ApiException("Cannot persist the entity with a null user id in the RequestContext.");
         }
@@ -56,7 +56,7 @@ public abstract class Auditable {
 
     @PreUpdate
     public void auditablePreUpdate(){
-        Long userId = RequestContext.getUserId();
+        Long userId = 0l;
         if(userId == null){
             throw new ApiException("Cannot update the entity with a null user id in the RequestContext.");
         }

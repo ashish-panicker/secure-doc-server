@@ -15,7 +15,7 @@ public class EmailUtils {
     }
 
     private static String getVerificationUrl(String host, String token, String action) {
-        return String.format("%s/verify/%s?token=%s", host, token, action);
+        return String.format("%s/verify/%s?token=%s", host, action, token);
     }
 
     public static String getResetPasswordMessage(String name, String host, String token) {
