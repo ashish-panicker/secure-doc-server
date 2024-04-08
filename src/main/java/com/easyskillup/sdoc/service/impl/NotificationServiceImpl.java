@@ -22,7 +22,7 @@ public class NotificationServiceImpl implements NotificationService {
     private final JavaMailSender mailSender;
     private final Logger logger = LoggerFactory.getLogger(NotificationServiceImpl.class);
 
-    @Value("${spring.mail.verified.host}")
+    @Value("${EMAIL_VERIFIED_HOST}")
     private String host;
 
     @Value("${EMAIL_ID}")
@@ -31,6 +31,7 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     @Async
     public void sendNewAccountNotification(String name, String toEmail, String token) {
+        System.err.println(fromEmail);
         try {
             var message = new SimpleMailMessage();
             message.setSubject(NEW_USER_ACCOUNT_VERIFICATION);

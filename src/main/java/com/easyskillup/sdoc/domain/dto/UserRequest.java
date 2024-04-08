@@ -1,8 +1,10 @@
 package com.easyskillup.sdoc.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.ToString;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record UserRequest(
@@ -13,7 +15,8 @@ public record UserRequest(
         @NotEmpty(message = "Email cannot be empty")
         @Email(message = "Email must be in proper format")
         String email,
-        @NotEmpty(message = "Password cannot be empty") String password,
+        @NotEmpty(message = "Password cannot be empty")
+        String password,
         String bio,
         String phone,
         String imageUrl

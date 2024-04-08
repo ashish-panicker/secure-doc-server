@@ -5,8 +5,8 @@ spring:
     active: ${ACTIVE_PROFILE:dev}
   mail:
     host: ${EMAIL_HOST}
-    username: ${EMAIL_USER}
-    password: ${EMAIL_PASS}
+    username: ${EMAIL_ID}
+    password: ${EMAIL_PASSWORD}
     port: ${EMAIL_PORT}
     default-encoding: UTF-8
     properties:
